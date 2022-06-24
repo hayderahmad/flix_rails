@@ -11,10 +11,11 @@
   </head>
 
   <body>
-    <header><%=image_tag("logo") %></header>
+    <%= render "layouts/header"%>
       <div class= "content">
         <%= yield %>
       </div>
-    <footer>Made by Haider</footer>
+    <%= render "layouts/footer"%>
+    
   </body>
 </html>
