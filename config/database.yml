@@ -11,11 +11,11 @@ default: &default
 
 development:
   <<: *default
-  database: /tmp/project/development.sqlite3
+  database: project/development.sqlite3
 
 test:
   <<: *default
-  database: /tmp/project/test.sqlite3
+  database: project/test.sqlite3
 
 production:
   <<: *default

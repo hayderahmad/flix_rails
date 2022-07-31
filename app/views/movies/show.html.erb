@@ -22,6 +22,9 @@
         <td><%= total_gross(@movie) %></td>
       </tr>
     </table>
+    <div class="reviews">
+    <%= link_to pluralize(@movie.reviews.size, "review"), movie_reviews_path(@movie) %>
+  </div>
   </div>
 </section>
 <section class="admin">
