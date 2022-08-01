@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+    before_action :require_signin
     def index
         @movies = Movie.released
 
