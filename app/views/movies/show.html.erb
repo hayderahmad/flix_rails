@@ -1,15 +1,22 @@
 <section class="movie-details">
-<%= image_tag @movie.image_file_name %>
+  <div class="image">
+    <%= image_tag @movie.image_file_name %>
+  </div>
   <div class="details">
     <h1><%= @movie.title %></h1>
     <h2>
       <%= year_of(@movie) %> &bull; <%= @movie.rating %>
     </h2>
+    <div class="reviews">
+       <%= average_stars(@movie) %>
+      <%= link_to pluralize(@movie.reviews.size, "review"),
+                  movie_reviews_path(@movie) %>
+    </div>
     <p>
       <%= @movie.description %>
     </p>
     <table>
-    <tr>
+      <tr>
         <th>Director:</th>
         <td><%= @movie.director %></td>
       </tr>
@@ -22,13 +29,15 @@
         <td><%= total_gross(@movie) %></td>
       </tr>
     </table>
-    <div class="reviews">
-    <%= link_to pluralize(@movie.reviews.size, "review"), movie_reviews_path(@movie) %>
-  </div>
+    <%= link_to "Write Review", new_movie_review_path(@movie),
+              class: 'review' %>
   </div>
 </section>
+
 <section class="admin">
-    <%= link_to "Edit", edit_movie_path(@movie), class: "button"%>
-    <%= button_to "Delete", movie_path(@movie), method: :delete, data:{confirm: "are you sure?"}%>
-    
+  <%= link_to 'Edit', edit_movie_path(@movie), class: 'button' %>
+  <%= button_to 'Delete', movie_path(@movie), class: 'button',
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
 </section>
+    
