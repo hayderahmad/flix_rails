@@ -1,5 +1,5 @@
 <%= form_with(model: movie, local: true) do |f| %>
-  
+  <%= movie.errors.full_messages.to_sentence %>
   <%= f.label :title %>
   <%= f.text_field :title %>
 
