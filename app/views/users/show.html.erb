@@ -1,7 +1,7 @@
 <section class="user">
   <h1><%= @user.name %></h1>
   <h2><%= mail_to(@user.email) %></h2>
-  <% if current_user == @user %>
+  <% if current_user == @user || current_user_admin?%>
    <div class="actions">
     <%= link_to "Edit Account", edit_user_path(@user),
                      class: "button edit" %>
@@ -10,4 +10,31 @@
               class: "button delete" %>
     </div>
   <%end%>
+  <% if @reviews.present? %>
+    <h3>Reviews</h3>
+    <% @reviews.each do |review| %>
+      <div class="review">
+        <div class="details">
+          <span class="title">
+            <%= link_to review.movie.title, review.movie %>
+          </span>
+          
+          <span class="date">
+            <%= time_ago_in_words(review.created_at) %> ago
+          </span>
+          <p>
+            <%= review.comment %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <% if @favorite_movies.present? %>
+  <h3>Favorite Movies</h3>
+  <div class="favorite-movies">
+    <% @favorite_movies.each do |movie| %>
+      <%= link_to image_tag(movie.image_file_name), movie %>
+    <% end %>
+  </div>
+<% end %>
 </section>

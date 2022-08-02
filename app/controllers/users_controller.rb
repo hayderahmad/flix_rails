@@ -6,6 +6,8 @@ class UsersController < ApplicationController
     end
     def show
         @user= User.find(params[:id])
+        @reviews = @user.reviews
+        @favorite_movies = @user.favorite_movies
     end
     def new
         @user = User.new
@@ -44,12 +46,7 @@ class UsersController < ApplicationController
             params.require(:user).permit(:name, :email, :password, :password_confirmation)
         end
 
-        def require_correct_user
-            @user = User.find(params[:id])
-            unless current_user == @user
-              redirect_to root_url
-            end
-        end
+        
 
 
 end

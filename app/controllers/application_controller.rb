@@ -7,8 +7,18 @@ class ApplicationController < ActionController::Base
     end
 
     def current_user
-        @current_user ||= User.find(session[:user_id]) if session[:user_id]
+         User.find(session[:user_id]) if session[:user_id]
     end
-    
+    def current_user_admin?
+        User.find(session[:user_id]).admin
+    end
+    def require_correct_user
+        @user = User.find(params[:id])
+        unless current_user == @user
+          redirect_to root_url
+        end
+    end
     helper_method :current_user
+    helper_method :current_user_admin?
+    helper_method :require_correct_user
 end
